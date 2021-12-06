@@ -13,31 +13,30 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorPostSorterTest {
 
     @Test
-    void sort_withNull_returnsNull(){
+    void sort_withNull_returnsNull() {
         List<UserPost> actual = null;
         actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(null,actual);
+        Assertions.assertEquals(null, actual);
     }
 
     @Test
-    void sort_withEmptyList_returnsEmptyList(){
+    void sort_withEmptyList_returnsEmptyList() {
         List<UserPost> actual = Arrays.asList();
         List<UserPost> expected = Arrays.asList();
         actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void sort_withOneElement_returnsListWithOneElement(){
+    void sort_withOneElement_returnsListWithOneElement() {
         UserPost userPost1 = new UserPost("Joe Bloggs",
                 OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
                 "Hello World!", 2);
         List<UserPost> actual = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
         actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
-
 
     @Test
     void sort_withMultipleElements_returnsListWithMultipleElements() {
@@ -59,7 +58,7 @@ class AuthorPostSorterTest {
         //act
         actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
         //asses
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
@@ -82,11 +81,6 @@ class AuthorPostSorterTest {
         //act
         actual = new AuthorPostSorter().sort(actual, SortOrder.DESC);
         //asses
-        Assertions.assertEquals(expected,actual);
+        Assertions.assertEquals(expected, actual);
     }
-
-
-
-
-
 }
