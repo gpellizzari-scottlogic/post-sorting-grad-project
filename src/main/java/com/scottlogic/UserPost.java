@@ -33,13 +33,11 @@ public class UserPost {
         return likeCount;
     }
 
-    // function that gets the author and returns the surname if it has one
+    // Function that returns the surname if an author has one
     public String getAuthorSurname() {
-        String surname = this.author;
-        String[] names = surname.split(" ");
-        if (names.length > 1) {
-            surname = names[1];
-        }
+        String surname = "";
+        String[] names = this.author.split(" ");
+        surname = names[names.length - 1];
         return surname;
     }
 
