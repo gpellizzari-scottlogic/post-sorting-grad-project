@@ -84,7 +84,7 @@ class AuthorPostFilterTest {
 
     @Test
     void authorPostFilter_withMultipleElements_returnsMatch() {
-        List<UserPost> actual = Arrays.asList(userPost1,userPost2,userPost3,userPost4,userPost5);
+        List<UserPost> actual = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
         List<UserPost> expected = Arrays.asList(userPost4);
 
         actual = new AuthorPostFilter("Cucumber").filter(actual);
@@ -93,14 +93,10 @@ class AuthorPostFilterTest {
 
     @Test
     void authorPostFilter_withMultipleElements_returnsMatches() {
-        List<UserPost> actual = Arrays.asList(userPost1,userPost2,userPost3,userPost4,userPost5);
+        List<UserPost> actual = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
         List<UserPost> expected = Arrays.asList(userPost1, userPost2);
 
         actual = new AuthorPostFilter("joe bloggs").filter(actual);
         Assertions.assertEquals(expected, actual);
     }
-
-
-
-
 }
