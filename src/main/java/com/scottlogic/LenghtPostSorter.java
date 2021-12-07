@@ -5,20 +5,20 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class AuthorPostSorter implements PostSorter {
+public class LenghtPostSorter implements PostSorter {
+
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
-
         if (inputList == null) {
             return null;
         } else if (inputList.isEmpty()) {
             return inputList;
         }
         List<UserPost> userPosts = new ArrayList<UserPost>(inputList) ;
-        if(sortOrder.equals((sortOrder.ASC))){
-            Collections.sort(userPosts, Comparator.comparing(UserPost::getAuthor));
+        if (sortOrder.equals(SortOrder.ASC)) {
+            Collections.sort(userPosts, Comparator.comparingInt(o -> o.getContents().length()));
         } else {
-            Collections.sort(userPosts, Comparator.comparing(UserPost::getAuthor).reversed());
+            Collections.sort(userPosts, Collections.reverseOrder(Comparator.comparingInt(o -> o.getContents().length())));
         }
         return userPosts;
     }
