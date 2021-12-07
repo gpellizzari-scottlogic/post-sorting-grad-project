@@ -14,7 +14,7 @@ public class LenghtPostSorter implements PostSorter {
         } else if (inputList.isEmpty()) {
             return inputList;
         }
-        List<UserPost> userPosts = new ArrayList<UserPost>(inputList) ;
+        List<UserPost> userPosts = new ArrayList<UserPost>(inputList);
         if (sortOrder.equals(SortOrder.ASC)) {
             Collections.sort(userPosts, Comparator.comparingInt(o -> o.getContents().length()));
         } else {

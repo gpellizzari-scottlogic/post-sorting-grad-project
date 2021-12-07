@@ -33,12 +33,22 @@ public class UserPost {
         return likeCount;
     }
 
+    // function that gets the author and returns the surname if it has one
+    public String getAuthorSurname() {
+        String surname = this.author;
+        String[] names = surname.split(" ");
+        if (names.length > 1) {
+            surname = names[1];
+        }
+        return surname;
+    }
+
     @Override
     public String toString() {
         return "Author: " + author + "\n" +
-               "Time Posted: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(dateTime) + "\n" +
-               "Likes: " + likeCount + "\n" +
-               contents;
+                "Time Posted: " + DateTimeFormatter.RFC_1123_DATE_TIME.format(dateTime) + "\n" +
+                "Likes: " + likeCount + "\n" +
+                contents;
     }
 
     @Override

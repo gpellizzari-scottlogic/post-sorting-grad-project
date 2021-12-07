@@ -14,7 +14,7 @@ public class LikePostSorter implements PostSorter {
         } else if (inputList.isEmpty()) {
             return inputList;
         }
-        List<UserPost> userPosts = new ArrayList<UserPost>(inputList) ;
+        List<UserPost> userPosts = new ArrayList<UserPost>(inputList);
         if (sortOrder.equals(SortOrder.ASC)) {
             Collections.sort(userPosts, Comparator.comparing(UserPost::getLikeCount));
         } else {
