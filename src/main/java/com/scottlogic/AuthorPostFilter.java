@@ -23,9 +23,9 @@ public class AuthorPostFilter implements PostFilter {
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
         List<UserPost> filteredList = new ArrayList<UserPost>();
-        if(inputList == null){
+        if (inputList == null) {
             return null;
-        } else if (inputList.isEmpty() || authorToFilter.length()<1) {
+        } else if (inputList.isEmpty() || authorToFilter.length() < 1) {
             return new ArrayList<UserPost>();
         }
         for (UserPost userPost : inputList) {
