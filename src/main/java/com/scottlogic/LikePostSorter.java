@@ -14,12 +14,12 @@ public class LikePostSorter implements PostSorter {
         } else if (inputList.isEmpty()) {
             return inputList;
         }
-        List<UserPost> userPosts = new ArrayList<UserPost>(inputList);
+        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
         if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(userPosts, Comparator.comparing(UserPost::getLikeCount));
+            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getLikeCount));
         } else {
-            Collections.sort(userPosts, Comparator.comparing(UserPost::getLikeCount).reversed());
+            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getLikeCount).reversed());
         }
-        return userPosts;
+        return sortedUserPosts;
     }
 }

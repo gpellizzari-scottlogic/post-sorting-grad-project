@@ -34,48 +34,48 @@ class AuthorPostSorterTest {
 
     @Test
     void authorPostSort_withNull_returnsNull() {
-        List<UserPost> actual = null;
-        actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(null, actual);
+        List<UserPost> initialList = null;
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
+        Assertions.assertEquals(null, sortedList);
     }
 
     @Test
     void authorPostSort_withEmptyList_returnsEmptyList() {
-        List<UserPost> actual = Arrays.asList();
+        List<UserPost> initialList = Arrays.asList();
         List<UserPost> expected = Arrays.asList();
-        actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test
     void authorPostSort_withOneElement_returnsListWithOneElement() {
-        List<UserPost> actual = Arrays.asList(userPost1);
+        List<UserPost> initialList = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
-        actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test
     void authorPostSort_withMultipleElements_returnsListWithMultipleElements() {
-        List<UserPost> actual = Arrays.asList(userPost5, userPost3, userPost1, userPost2);
+        List<UserPost> initialList = Arrays.asList(userPost5, userPost3, userPost1, userPost2);
         List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost3, userPost5);
-        actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test
     void authorPostSort_withMultipleElementsAndName_returnsListWithMultipleElements() {
-        List<UserPost> actual = Arrays.asList(userPost3, userPost1, userPost2, userPost5, userPost4);
+        List<UserPost> initialList = Arrays.asList(userPost3, userPost1, userPost2, userPost5, userPost4);
         List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost4, userPost3, userPost5);
-        actual = new AuthorPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test
     void authorPostSort_withMultipleElementsDESC_returnsListWithMultipleElementsDESC() {
-        List<UserPost> actual = Arrays.asList(userPost1, userPost5, userPost2, userPost3);
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost5, userPost2, userPost3);
         List<UserPost> expected = Arrays.asList(userPost5, userPost3, userPost1, userPost2);
-        actual = new AuthorPostSorter().sort(actual, SortOrder.DESC);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.DESC);
+        Assertions.assertEquals(expected, sortedList);
     }
 }
