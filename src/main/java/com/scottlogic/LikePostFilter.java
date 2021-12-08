@@ -29,7 +29,6 @@ public class LikePostFilter implements PostFilter {
                     filteredList.add(userPost);
                 }
             }
-
         }
         return filteredList;
     }
