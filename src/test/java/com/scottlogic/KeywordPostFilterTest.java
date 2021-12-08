@@ -34,81 +34,81 @@ class KeywordPostFilterTest {
 
     @Test
     void keywordPostFilter_withNull_returnsNull() {
-        List<UserPost> actual = null;
-        actual = new KeywordPostFilter("").filter(actual);
-        Assertions.assertEquals(null, actual);
+        List<UserPost> initialList = null;
+        List<UserPost> filteredList = new KeywordPostFilter("").filter(initialList);
+        Assertions.assertEquals(null, filteredList);
     }
 
     @Test
     void keywordPostFilter_withEmptyList_returnsEmptyList() {
-        List<UserPost> actual = Arrays.asList();
+        List<UserPost> initialList = Arrays.asList();
         List<UserPost> expected = Arrays.asList();
-        actual = new KeywordPostFilter("test").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("test").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withOneElementAndEmptyField_returnsEmptyList() {
-        List<UserPost> actual = Arrays.asList(userPost1);
+        List<UserPost> initialList = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList();
-        actual = new KeywordPostFilter("").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withOneElement_returnsMatchAtMiddleOfSentence() {
-        List<UserPost> actual = Arrays.asList(userPost3);
+        List<UserPost> initialList = Arrays.asList(userPost3);
         List<UserPost> expected = Arrays.asList(userPost3);
-        actual = new KeywordPostFilter("Example").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("Example").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withOneElement_returnsMatchAtTheStartOfPost() {
-        List<UserPost> actual = Arrays.asList(userPost1);
+        List<UserPost> initialList = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
-        actual = new KeywordPostFilter("Hello").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("Hello").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withOneElement_returnsMatchAtTheEndOfPost() {
-        List<UserPost> actual = Arrays.asList(userPost1);
+        List<UserPost> initialList = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
-        actual = new KeywordPostFilter("World").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("World").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withMultipleElements_returnsMatch() {
-        List<UserPost> actual = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
         List<UserPost> expected = Arrays.asList(userPost5);
-        actual = new KeywordPostFilter("jungle").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("jungle").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withMultipleElements_returnsMatches() {
-        List<UserPost> actual = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
         List<UserPost> expected = Arrays.asList(userPost3, userPost4);
-        actual = new KeywordPostFilter("example").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("example").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withMultipleElements_returnsEmptyList() {
-        List<UserPost> actual = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
         List<UserPost> expected = Arrays.asList();
-        actual = new KeywordPostFilter("Tiramisu").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("Tiramisu").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void keywordPostFilter_withMultipleElementsWithWordOfFieldEmbedded_returnsEmptyList() {
-        List<UserPost> actual = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
         List<UserPost> expected = Arrays.asList();
-        actual = new KeywordPostFilter("Terra").filter(actual);
-        Assertions.assertEquals(expected, actual);
+        List<UserPost> filteredList = new KeywordPostFilter("Terra").filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
 
