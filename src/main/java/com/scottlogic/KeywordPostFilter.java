@@ -9,14 +9,6 @@ public class KeywordPostFilter implements PostFilter {
 
     private String keyword;
 
-    public String getKeyword() {
-        return keyword;
-    }
-
-    public void setKeyword(String keyword) {
-        this.keyword = keyword;
-    }
-
     public KeywordPostFilter(String keyword) {
         this.keyword = keyword;
     }
@@ -40,4 +32,14 @@ public class KeywordPostFilter implements PostFilter {
         }
         return filteredList;
     }
+
+    public String getKeyword() {
+        return keyword;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+
 }
