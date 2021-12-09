@@ -1,5 +1,8 @@
-package com.scottlogic;
+package com.scottlogic.sorters;
 
+import com.scottlogic.SortOrder;
+import com.scottlogic.UserPost;
+import com.scottlogic.sorters.DatePostSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -8,9 +11,7 @@ import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class LenghtPostSorterTest {
+class DatePostSorterTest {
 
     UserPost userPost1 = new UserPost("Joe Bloggs",
             OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
@@ -29,41 +30,42 @@ class LenghtPostSorterTest {
             "An example of a post \nwith lines breaks.", 3);
 
     @Test
-    void lenghtPostSort_withNull_returnsNull() {
-        List<UserPost> actual = null;
-        actual = new LenghtPostSorter().sort(actual, SortOrder.ASC);
+    void datePostSort_withNull_returnsNull() {
+        List<UserPost> initialList = null;
+        List<UserPost> actual = initialList;
+        actual = new DatePostSorter().sort(actual, SortOrder.ASC);
         Assertions.assertEquals(null, actual);
     }
 
     @Test
-    void lenghtPostSort_withEmptyList_returnsEmptyList() {
+    void datePostSort_withEmptyList_returnsEmptyList() {
         List<UserPost> actual = Arrays.asList();
         List<UserPost> expected = Arrays.asList();
-        actual = new LenghtPostSorter().sort(actual, SortOrder.ASC);
+        actual = new DatePostSorter().sort(actual, SortOrder.ASC);
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void lenghtPostSort_withOneElement_returnsListWithOneElement() {
+    void datePostSort_withOneElement_returnsListWithOneElement() {
         List<UserPost> actual = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
-        actual = new LenghtPostSorter().sort(actual, SortOrder.ASC);
+        actual = new DatePostSorter().sort(actual, SortOrder.ASC);
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void lenghtPostSort_withMultipleElements_returnsListWithMultipleElements() {
-        List<UserPost> actual = Arrays.asList(userPost4, userPost2, userPost3, userPost1);
+    void datePostSort_withMultipleElements_returnsListWithMultipleElements() {
+        List<UserPost> actual = Arrays.asList(userPost2, userPost3, userPost4, userPost1);
         List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost3, userPost4);
-        actual = new LenghtPostSorter().sort(actual, SortOrder.ASC);
+        actual = new DatePostSorter().sort(actual, SortOrder.ASC);
         Assertions.assertEquals(expected, actual);
     }
 
     @Test
-    void lenghtPostSort_withMultipleElementsDESC_returnsListWithMultipleElementsDESC() {
-        List<UserPost> actual = Arrays.asList(userPost4, userPost2, userPost3, userPost1);
+    void datePostSort_withMultipleElementsDESC_returnsListWithMultipleElementsDESC() {
+        List<UserPost> actual = Arrays.asList(userPost2, userPost3, userPost4, userPost1);
         List<UserPost> expected = Arrays.asList(userPost3, userPost4, userPost2, userPost1);
-        actual = new LenghtPostSorter().sort(actual, SortOrder.DESC);
+        actual = new DatePostSorter().sort(actual, SortOrder.DESC);
         Assertions.assertEquals(expected, actual);
     }
 }

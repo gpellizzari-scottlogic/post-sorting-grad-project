@@ -1,15 +1,14 @@
-package com.scottlogic;
+package com.scottlogic.filters;
 
+import com.scottlogic.UserPost;
+import com.scottlogic.filters.DatePostFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class DatePostFilterTest {
 
@@ -42,7 +41,7 @@ class DatePostFilterTest {
     OffsetDateTime date3 = OffsetDateTime.of(2020, 1, 2, 7, 12, 3, 0, ZoneOffset.UTC);
     OffsetDateTime date4 = OffsetDateTime.of(2020, 1, 3, 9, 12, 3, 0, ZoneOffset.UTC);
     OffsetDateTime date5 = OffsetDateTime.of(2021, 4, 10, 7, 12, 3, 0, ZoneOffset.UTC);
-    
+
     @Test
     void datePostFilter_withNull_returnsNull() {
         List<UserPost> initialList = null;

@@ -1,5 +1,8 @@
-package com.scottlogic;
+package com.scottlogic.sorters;
 
+import com.scottlogic.SortOrder;
+import com.scottlogic.UserPost;
+import com.scottlogic.sorters.AuthorPostSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +10,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorPostSorterTest {
 
