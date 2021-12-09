@@ -6,12 +6,12 @@ import com.scottlogic.UserPost;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AndFilter implements PostFilter {
+public class OrFilter implements PostFilter {
 
     PostFilter postFilter1;
     PostFilter postFilter2;
 
-    public AndFilter(PostFilter postFilter1, PostFilter postFilter2) {
+    public OrFilter(PostFilter postFilter1, PostFilter postFilter2) {
         this.postFilter1 = postFilter1;
         this.postFilter2 = postFilter2;
     }
@@ -23,9 +23,13 @@ public class AndFilter implements PostFilter {
         } else if (inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
-        List<UserPost> filteredList1 = postFilter1.filter(inputList);
+        List<UserPost> combinedFilter = postFilter1.filter(inputList);
         List<UserPost> filteredList2 = postFilter2.filter(inputList);
-        filteredList1.retainAll(filteredList2);
-        return filteredList1;
+        for (UserPost userPost : filteredList2) {
+            if (!combinedFilter.contains(userPost)) {
+                combinedFilter.add(userPost);
+            }
+        }
+        return combinedFilter;
     }
 }
