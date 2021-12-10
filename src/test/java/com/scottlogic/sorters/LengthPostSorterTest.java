@@ -30,14 +30,14 @@ class LengthPostSorterTest {
             "An example of a post \nwith lines breaks.", 3);
 
     @Test
-    void lenghtPostSort_withNull_returnsNull() {
+    void lengthPostSort_withNull_returnsNull() {
         List<UserPost> actual = null;
         actual = new LengthPostSorter().sort(actual, SortOrder.ASC);
         Assertions.assertEquals(null, actual);
     }
 
     @Test
-    void lenghtPostSort_withEmptyList_returnsEmptyList() {
+    void lengthPostSort_withEmptyList_returnsEmptyList() {
         List<UserPost> actual = Arrays.asList();
         List<UserPost> expected = Arrays.asList();
         actual = new LengthPostSorter().sort(actual, SortOrder.ASC);
@@ -45,7 +45,7 @@ class LengthPostSorterTest {
     }
 
     @Test
-    void lenghtPostSort_withOneElement_returnsListWithOneElement() {
+    void lengthPostSort_withOneElement_returnsListWithOneElement() {
         List<UserPost> actual = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
         actual = new LengthPostSorter().sort(actual, SortOrder.ASC);
@@ -53,7 +53,7 @@ class LengthPostSorterTest {
     }
 
     @Test
-    void lenghtPostSort_withMultipleElements_returnsListWithMultipleElements() {
+    void lengthPostSort_withMultipleElements_returnsListWithMultipleElements() {
         List<UserPost> actual = Arrays.asList(userPost4, userPost2, userPost3, userPost1);
         List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost3, userPost4);
         actual = new LengthPostSorter().sort(actual, SortOrder.ASC);
@@ -61,7 +61,7 @@ class LengthPostSorterTest {
     }
 
     @Test
-    void lenghtPostSort_withMultipleElementsDESC_returnsListWithMultipleElementsDESC() {
+    void lengthPostSort_withMultipleElementsDESC_returnsListWithMultipleElementsDESC() {
         List<UserPost> actual = Arrays.asList(userPost4, userPost2, userPost3, userPost1);
         List<UserPost> expected = Arrays.asList(userPost3, userPost4, userPost2, userPost1);
         actual = new LengthPostSorter().sort(actual, SortOrder.DESC);
