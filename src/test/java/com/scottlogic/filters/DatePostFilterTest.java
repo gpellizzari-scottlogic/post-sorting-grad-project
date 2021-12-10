@@ -5,6 +5,7 @@ import com.scottlogic.filters.DatePostFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.DateTimeException;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
@@ -41,6 +42,19 @@ class DatePostFilterTest {
     OffsetDateTime date3 = OffsetDateTime.of(2020, 1, 2, 7, 12, 3, 0, ZoneOffset.UTC);
     OffsetDateTime date4 = OffsetDateTime.of(2020, 1, 3, 9, 12, 3, 0, ZoneOffset.UTC);
     OffsetDateTime date5 = OffsetDateTime.of(2021, 4, 10, 7, 12, 3, 0, ZoneOffset.UTC);
+
+    @Test
+    void datePostFilter_withMultipleElements_endDateBeforeStartDate_throwsException() {
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
+        String expectedResult = "";
+        String errorMessage = "";
+        try{
+            List<UserPost> filteredList = new DatePostFilter(date1, date2).filter(initialList);
+        }catch (DateTimeException e){
+            errorMessage = e.getMessage();
+        }
+        Assertions.assertEquals(expectedResult, errorMessage);
+    }
 
     @Test
     void datePostFilter_withNull_returnsNull() {

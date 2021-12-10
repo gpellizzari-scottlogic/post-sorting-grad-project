@@ -18,12 +18,12 @@ public class DatePostSorter implements PostSorter {
         } else if (inputList.isEmpty()) {
             return inputList;
         }
-        List<UserPost> userPosts = new ArrayList<UserPost>(inputList) ;
+        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList) ;
         if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(userPosts, Comparator.comparing(UserPost::getDateTime));
+            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getDateTime));
         } else {
-            Collections.sort(userPosts, Comparator.comparing(UserPost::getDateTime).reversed());
+            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getDateTime).reversed());
         }
-        return userPosts;
+        return sortedUserPosts;
     }
 }
