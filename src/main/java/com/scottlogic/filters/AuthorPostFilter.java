@@ -26,11 +26,11 @@ public class AuthorPostFilter implements PostFilter {
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
         List<UserPost> filteredList = new ArrayList<UserPost>();
-        if (inputList == null) {
-            return null;
-        } else if (inputList.isEmpty() || authorToFilter.length() < 1) {
+
+        if (inputList == null || inputList.isEmpty() || authorToFilter.isEmpty()) {
             return new ArrayList<UserPost>();
         }
+
         for (UserPost userPost : inputList) {
             if (userPost.getAuthor().equalsIgnoreCase(this.authorToFilter)) {
                 filteredList.add(userPost);

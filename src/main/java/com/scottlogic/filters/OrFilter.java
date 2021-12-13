@@ -18,13 +18,13 @@ public class OrFilter implements PostFilter {
 
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
-        if (inputList == null) {
-            return null;
-        } else if (inputList.isEmpty()) {
+        if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
+
         List<UserPost> combinedFilter = postFilter1.filter(inputList);
         List<UserPost> filteredList2 = postFilter2.filter(inputList);
+
         for (UserPost userPost : filteredList2) {
             if (!combinedFilter.contains(userPost)) {
                 combinedFilter.add(userPost);

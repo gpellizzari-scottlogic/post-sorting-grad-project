@@ -30,10 +30,11 @@ class DatePostSorterTest {
             "An example of a post \nwith lines breaks.", 3);
 
     @Test
-    void datePostSort_withNull_returnsNull() {
+    void datePostSort_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> sortedList = new DatePostSorter().sort(initialList, SortOrder.ASC);
-        Assertions.assertEquals(null, sortedList);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test

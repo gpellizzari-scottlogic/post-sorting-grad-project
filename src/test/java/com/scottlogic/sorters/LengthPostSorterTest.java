@@ -30,10 +30,11 @@ class LengthPostSorterTest {
             "An example of a post \nwith lines breaks.", 3);
 
     @Test
-    void lengthPostSort_withNull_returnsNull() {
+    void lengthPostSort_withNull_returnsEmptyList() {
         List<UserPost> actual = null;
+        List<UserPost> expected = Arrays.asList();
         actual = new LengthPostSorter().sort(actual, SortOrder.ASC);
-        Assertions.assertEquals(null, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test

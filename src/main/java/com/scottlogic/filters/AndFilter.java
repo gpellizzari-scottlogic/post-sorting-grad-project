@@ -18,11 +18,10 @@ public class AndFilter implements PostFilter {
 
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
-        if (inputList == null) {
-            return null;
-        } else if (inputList.isEmpty()) {
+        if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
+
         List<UserPost> filteredList1 = postFilter1.filter(inputList);
         List<UserPost> filteredList2 = postFilter2.filter(inputList);
         filteredList1.retainAll(filteredList2);

@@ -34,10 +34,11 @@ class AuthorPostSorterTest {
             "Hello World!", 2);
 
     @Test
-    void authorPostSort_withNull_returnsNull() {
+    void authorPostSort_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
-        Assertions.assertEquals(null, sortedList);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test

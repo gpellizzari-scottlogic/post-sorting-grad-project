@@ -57,10 +57,11 @@ class DatePostFilterTest {
     }
 
     @Test
-    void datePostFilter_withNull_returnsNull() {
+    void datePostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> filteredList = new DatePostFilter(date1, date2).filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test

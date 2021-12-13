@@ -37,10 +37,11 @@ class LikePostFilterTest {
             "I will not approve your PR", -1);
 
     @Test
-    void likePostFilter_withNull_returnsNull() {
+    void likePostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test

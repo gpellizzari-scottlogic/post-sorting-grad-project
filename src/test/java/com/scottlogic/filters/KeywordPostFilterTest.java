@@ -33,10 +33,11 @@ class KeywordPostFilterTest {
             "Welcome to the jungle of misery extraterrestrial", 2);
 
     @Test
-    void keywordPostFilter_withNull_returnsNull() {
+    void keywordPostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> filteredList = new KeywordPostFilter("").filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test

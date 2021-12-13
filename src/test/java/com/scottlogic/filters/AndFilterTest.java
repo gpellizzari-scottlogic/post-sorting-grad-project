@@ -42,10 +42,11 @@ class AndFilterTest {
     LikePostFilter likePostFilter = new LikePostFilter(true); //includes userPosts 1-2-4
 
     @Test
-    void andPostFilter_withNull_returnsNull() {
+    void andPostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> filteredList = new AndFilter(authorPostFilter, keywordPostFilter).filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test

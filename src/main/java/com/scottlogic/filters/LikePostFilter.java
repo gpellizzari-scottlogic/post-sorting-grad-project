@@ -17,11 +17,11 @@ public class LikePostFilter implements PostFilter {
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
         List<UserPost> filteredList = new ArrayList<UserPost>();
-        if (inputList == null) {
-            return null;
-        } else if (inputList.isEmpty()) {
+
+        if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
+
         for (UserPost userPost : inputList) {
             if (isLikedPosts) {
                 if (userPost.getLikeCount() > 0) {

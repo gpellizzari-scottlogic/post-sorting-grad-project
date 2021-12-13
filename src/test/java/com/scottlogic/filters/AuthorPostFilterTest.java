@@ -33,10 +33,11 @@ class AuthorPostFilterTest {
             "Welcome to the jungle of misery extraterrestrial", 0);
 
     @Test
-    void authorPostFilter_withNull_returnsNull() {
+    void authorPostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> filteredList = new AuthorPostFilter("Alreen Trapezoid").filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test

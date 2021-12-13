@@ -45,10 +45,11 @@ class OrFilterTest {
     LikePostFilter likePostFilter = new LikePostFilter(true); //includes userPosts 1-2-4
 
     @Test
-    void orPostFilter_withNull_returnsNull() {
+    void orPostFilter_withNull_returnsEmptyList() {
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> initialList = null;
         List<UserPost> filteredList = new OrFilter(authorPostFilter, keywordPostFilter).filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
