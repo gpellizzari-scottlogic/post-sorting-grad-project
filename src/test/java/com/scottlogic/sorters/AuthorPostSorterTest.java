@@ -1,5 +1,8 @@
-package com.scottlogic;
+package com.scottlogic.sorters;
 
+import com.scottlogic.SortOrder;
+import com.scottlogic.UserPost;
+import com.scottlogic.sorters.AuthorPostSorter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +10,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorPostSorterTest {
 
@@ -33,10 +34,11 @@ class AuthorPostSorterTest {
             "Hello World!", 2);
 
     @Test
-    void authorPostSort_withNull_returnsNull() {
+    void authorPostSort_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, SortOrder.ASC);
-        Assertions.assertEquals(null, sortedList);
+        Assertions.assertEquals(expected, sortedList);
     }
 
     @Test

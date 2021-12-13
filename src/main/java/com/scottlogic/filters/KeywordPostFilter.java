@@ -1,4 +1,7 @@
-package com.scottlogic;
+package com.scottlogic.filters;
+
+import com.scottlogic.PostFilter;
+import com.scottlogic.UserPost;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,11 +19,11 @@ public class KeywordPostFilter implements PostFilter {
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
         List<UserPost> filteredList = new ArrayList<UserPost>();
-        if (inputList == null) {
-            return null;
-        } else if (inputList.isEmpty() || keyword.length() < 1) {
+
+        if (inputList == null || inputList.isEmpty() || keyword.length() < 1) {
             return new ArrayList<UserPost>();
         }
+
         String regex = "\\b" + this.keyword.toLowerCase() + "\\b";
         Pattern pattern = Pattern.compile(regex);
 
@@ -40,6 +43,4 @@ public class KeywordPostFilter implements PostFilter {
     public void setKeyword(String keyword) {
         this.keyword = keyword;
     }
-
-
 }

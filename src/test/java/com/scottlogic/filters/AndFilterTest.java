@@ -1,5 +1,6 @@
-package com.scottlogic;
+package com.scottlogic.filters;
 
+import com.scottlogic.UserPost;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LikePostFilterTest {
+class AndFilterTest {
 
     UserPost userPost1 = new UserPost("Joe Bloggs",
             OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
@@ -35,59 +36,48 @@ class LikePostFilterTest {
     UserPost userPost6 = new UserPost("Luke Vincent",
             OffsetDateTime.of(2021, 12, 8, 7, 12, 3, 0, ZoneOffset.UTC),
             "I will not approve your PR", -1);
+    
+    AuthorPostFilter authorPostFilter = new AuthorPostFilter("Joe Bloggs"); //includes userPosts 1-2
+    KeywordPostFilter keywordPostFilter = new KeywordPostFilter("example"); //includes userPosts 3-4
+    LikePostFilter likePostFilter = new LikePostFilter(true); //includes userPosts 1-2-4
 
     @Test
-    void likePostFilter_withNull_returnsNull() {
+    void andPostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
-        List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        List<UserPost> expected = Arrays.asList();
+        List<UserPost> filteredList = new AndFilter(authorPostFilter, keywordPostFilter).filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
-    void likePostFilter_withEmptyList_returnsEmptyList() {
+    void andPostFilter_withEmptyList_returnsEmptyList() {
         List<UserPost> initialList = Arrays.asList();
         List<UserPost> expected = Arrays.asList();
-        List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
+        List<UserPost> filteredList = new AndFilter(authorPostFilter, keywordPostFilter).filter(initialList);
         Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
-    void likePostFilter_withOneElement_returnsOneElement() {
+    void andPostFilter_withOneElement_returnsOneElement() {
         List<UserPost> initialList = Arrays.asList(userPost1);
         List<UserPost> expected = Arrays.asList(userPost1);
-        List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
+        List<UserPost> filteredList = new AndFilter(authorPostFilter, likePostFilter).filter(initialList);
         Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
-    void likePostFilter_withNoElementsWithLikes_returnsEmptyList() {
-        List<UserPost> initialList = Arrays.asList(userPost5);
+    void andPostFilter_withMultipleElements_returnsOneElement(){
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5, userPost6);
+        List<UserPost> expected = Arrays.asList(userPost4);
+        List<UserPost> filteredList = new AndFilter(keywordPostFilter, likePostFilter).filter(initialList);
+        Assertions.assertEquals(expected, filteredList);
+    }
+
+    @Test
+    void andPostFilter_withMultipleElements_returnsNoElements(){
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5, userPost6);
         List<UserPost> expected = Arrays.asList();
-        List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
-        Assertions.assertEquals(expected, filteredList);
-    }
-
-    @Test
-    void likePostFilter_withMultipleElements_returnsMatches() {
-        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
-        List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost4);
-        List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
-        Assertions.assertEquals(expected, filteredList);
-    }
-
-    @Test
-    void likePostFilter_withMultipleElements_returnsMatchesWithoutLikes() {
-        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
-        List<UserPost> expected = Arrays.asList(userPost3, userPost5);
-        List<UserPost> filteredList = new LikePostFilter(false).filter(initialList);
-        Assertions.assertEquals(expected, filteredList);
-    }
-
-    @Test
-    void likePostFilter_withOneElementWithNegativeLikes_returnsEmptyList() {
-        List<UserPost> initialList = Arrays.asList(userPost6);
-        List<UserPost> expected = Arrays.asList();
-        List<UserPost> filteredList = new LikePostFilter(true).filter(initialList);
+        List<UserPost> filteredList = new AndFilter(authorPostFilter, keywordPostFilter).filter(initialList);
         Assertions.assertEquals(expected, filteredList);
     }
 }

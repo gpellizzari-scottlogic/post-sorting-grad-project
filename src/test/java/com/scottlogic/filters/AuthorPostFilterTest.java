@@ -1,5 +1,7 @@
-package com.scottlogic;
+package com.scottlogic.filters;
 
+import com.scottlogic.UserPost;
+import com.scottlogic.filters.AuthorPostFilter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,8 +9,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorPostFilterTest {
 
@@ -33,10 +33,11 @@ class AuthorPostFilterTest {
             "Welcome to the jungle of misery extraterrestrial", 0);
 
     @Test
-    void authorPostFilter_withNull_returnsNull() {
+    void authorPostFilter_withNull_returnsEmptyList() {
         List<UserPost> initialList = null;
+        List<UserPost> expected = Arrays.asList();
         List<UserPost> filteredList = new AuthorPostFilter("Alreen Trapezoid").filter(initialList);
-        Assertions.assertEquals(null, filteredList);
+        Assertions.assertEquals(expected, filteredList);
     }
 
     @Test

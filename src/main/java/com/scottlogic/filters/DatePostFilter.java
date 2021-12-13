@@ -1,4 +1,7 @@
-package com.scottlogic;
+package com.scottlogic.filters;
+
+import com.scottlogic.PostFilter;
+import com.scottlogic.UserPost;
 
 import java.time.DateTimeException;
 import java.time.OffsetDateTime;
@@ -22,11 +25,11 @@ public class DatePostFilter implements PostFilter {
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
         List<UserPost> filteredList = new ArrayList<UserPost>();
-        if (inputList == null) {
-            return null;
-        } else if (inputList.isEmpty()) {
+
+        if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
+
         for (UserPost userPost : inputList) {
             if (userPost.getDateTime().isAfter(startDate) && userPost.getDateTime().isBefore(endDate)) {
                 filteredList.add(userPost);
