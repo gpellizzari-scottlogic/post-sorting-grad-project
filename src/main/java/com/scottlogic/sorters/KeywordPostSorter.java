@@ -24,19 +24,16 @@ public class KeywordPostSorter implements PostSorter {
         this.keyword = keyword;
     }
 
-    //TODO: modify so that it matches pural words e.g. example has to match examples
+    //TODO: modify so that it matches plural words e.g. example has to match examples
     private int getNumberOfKeywords(UserPost userPost) {
         int numberOfKeywords = 0;
-        String[] wordsInPostContent = userPost.getContents().split(" ");
 
         String regex = "\\b" + this.keyword.toLowerCase() + "\\b";
         Pattern pattern = Pattern.compile(regex);
 
-        for (String word : wordsInPostContent) {
-            Matcher matcher = pattern.matcher(word.toLowerCase());
-            if (matcher.find()) {
-                numberOfKeywords++;
-            }
+        Matcher matcher = pattern.matcher(userPost.getContents().toLowerCase());
+        while (matcher.find()) {
+            numberOfKeywords++;
         }
         return numberOfKeywords;
     }
