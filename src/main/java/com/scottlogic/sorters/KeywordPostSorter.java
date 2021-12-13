@@ -24,9 +24,10 @@ public class KeywordPostSorter implements PostSorter {
         this.keyword = keyword;
     }
 
+    //TODO: modify so that it matches pural words e.g. example has to match examples
     private int getNumberOfKeywords(UserPost userPost) {
         int numberOfKeywords = 0;
-        String[] wordsInPostContent = userPost.getContents().split("");
+        String[] wordsInPostContent = userPost.getContents().split(" ");
 
         String regex = "\\b" + this.keyword.toLowerCase() + "\\b";
         Pattern pattern = Pattern.compile(regex);
@@ -37,7 +38,6 @@ public class KeywordPostSorter implements PostSorter {
                 numberOfKeywords++;
             }
         }
-
         return numberOfKeywords;
     }
 
