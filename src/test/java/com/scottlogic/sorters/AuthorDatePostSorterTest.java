@@ -78,4 +78,12 @@ class AuthorDatePostSorterTest {
         List<UserPost> filteredList = new AuthorDatePostSorter().sort(initialList, SortOrder.ASC);
         Assertions.assertEquals(expected, filteredList);
     }
+
+    @Test
+    void authorDatePostSorter_withMultipleElements_returnsMultipleElementsDesc() {
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5, userPost6, userPost7, userPost8);
+        List<UserPost> expected = Arrays.asList(userPost3, userPost6, userPost7, userPost8, userPost4, userPost1, userPost2);
+        List<UserPost> filteredList = new AuthorDatePostSorter().sort(initialList, SortOrder.DESC);
+        Assertions.assertEquals(expected, filteredList);
+    }
 }
