@@ -66,9 +66,9 @@ class AuthorPostFilterTest {
     }
 
     @Test
-    void authorPostFilter_withOneElementAndNoAuthorToFilter_returnsEmptyList() {
+    void authorPostFilter_withOneElementAndNoAuthorToFilter_returnsElement() {
         List<UserPost> initialList = Arrays.asList(userPost5);
-        List<UserPost> expected = Arrays.asList();
+        List<UserPost> expected = Arrays.asList(userPost5);
 
         List<UserPost> filteredList = new AuthorPostFilter("").filter(initialList);
         Assertions.assertEquals(expected, filteredList);

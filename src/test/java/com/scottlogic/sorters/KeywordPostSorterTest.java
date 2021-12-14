@@ -21,7 +21,7 @@ class KeywordPostSorterTest {
 
     UserPost userPost2 = new UserPost("Joe Bloggs",
             OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
-            "example 1, 2 example, really example everywhere!", 2);
+            "example1, 2example, really examples everywhere!", 2);
 
     UserPost userPost3 = new UserPost("Albert Einstein",
             OffsetDateTime.of(2020, 1, 3, 8, 53, 34, 0, ZoneOffset.UTC),
@@ -52,17 +52,17 @@ class KeywordPostSorterTest {
     }
 
     @Test
-    void keywordPostSorter_withOneElementAndEmptyField_returnsEmptyList() {
+    void keywordPostSorter_withOneElementAndEmptyField_returnsElement() {
         List<UserPost> initialList = Arrays.asList(userPost1);
-        List<UserPost> expected = Arrays.asList();
+        List<UserPost> expected = Arrays.asList(userPost1);
         List<UserPost> filteredList = new KeywordPostSorter("").sort(initialList, SortOrder.ASC);
         Assertions.assertEquals(expected, filteredList);
     }
 
     @Test
     void KeywordPostSorter_withMultipleElements_returnsMatches() {
-        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5);
-        List<UserPost> expected = Arrays.asList(userPost3, userPost4, userPost2);
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost4, userPost3, userPost5);
+        List<UserPost> expected = Arrays.asList(userPost1, userPost5, userPost3, userPost4, userPost2);
         List<UserPost> filteredList = new KeywordPostSorter("example").sort(initialList, SortOrder.ASC);
         Assertions.assertEquals(expected, filteredList);
     }

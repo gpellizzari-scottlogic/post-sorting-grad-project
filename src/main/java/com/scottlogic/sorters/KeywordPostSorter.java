@@ -24,11 +24,10 @@ public class KeywordPostSorter implements PostSorter {
         this.keyword = keyword;
     }
 
-    //TODO: modify so that it matches plural words e.g. example has to match examples
     private int getNumberOfKeywords(UserPost userPost) {
         int numberOfKeywords = 0;
 
-        String regex = "\\b" + this.keyword.toLowerCase() + "\\b";
+        String regex = this.keyword.toLowerCase();
         Pattern pattern = Pattern.compile(regex);
 
         Matcher matcher = pattern.matcher(userPost.getContents().toLowerCase());
@@ -42,11 +41,11 @@ public class KeywordPostSorter implements PostSorter {
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
         List<UserPost> outputList = new ArrayList<UserPost>();
 
-        if (inputList == null || inputList.isEmpty() || this.keyword.length() < 1) {
+        if (inputList == null || inputList.isEmpty()) {
             return outputList;
         }
 
-        outputList = new KeywordPostFilter(this.keyword).filter(inputList);
+        outputList = inputList;
 
         if (sortOrder.equals(SortOrder.ASC)) {
             Collections.sort(outputList, Comparator.comparingInt(o -> getNumberOfKeywords(o)));

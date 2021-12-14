@@ -37,15 +37,15 @@ class AuthorDatePostSorterTest {
 
     UserPost userPost6 = new UserPost("Cucumber",
             OffsetDateTime.of(2019, 10, 8, 12, 12, 3, 0, ZoneOffset.UTC),
-            "I will not approve your PR", -1); //2
+            "I Hate washing the dishes", -1); //2
 
     UserPost userPost7 = new UserPost("Cucumber",
             OffsetDateTime.of(2020, 12, 19, 7, 6, 34, 0, ZoneOffset.UTC),
-            "I will not approve your PR", -1); //3
+            "Dining in the dining room", -1); //3
 
     UserPost userPost8 = new UserPost("Cucumber",
             OffsetDateTime.of(2021, 2, 8, 7, 0, 0, 0, ZoneOffset.UTC),
-            "I will not approve your PR", -1); //4
+            "Racoons for dinner", -1); //4
 
     @Test
     void authorDatePostSorter_withNull_returnsEmptyList() {
@@ -74,7 +74,7 @@ class AuthorDatePostSorterTest {
     @Test
     void authorDatePostSorter_withMultipleElements_returnsMultipleElements() {
         List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5, userPost6, userPost7, userPost8);
-        List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost6, userPost7, userPost8, userPost4, userPost3);
+        List<UserPost> expected = Arrays.asList(userPost5, userPost1, userPost2, userPost6, userPost7, userPost8, userPost4, userPost3);
         List<UserPost> filteredList = new AuthorDatePostSorter().sort(initialList, SortOrder.ASC);
         Assertions.assertEquals(expected, filteredList);
     }
@@ -82,7 +82,7 @@ class AuthorDatePostSorterTest {
     @Test
     void authorDatePostSorter_withMultipleElements_returnsMultipleElementsDesc() {
         List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost3, userPost4, userPost5, userPost6, userPost7, userPost8);
-        List<UserPost> expected = Arrays.asList(userPost3, userPost6, userPost7, userPost8, userPost4, userPost1, userPost2);
+        List<UserPost> expected = Arrays.asList(userPost3, userPost6, userPost7, userPost8, userPost4, userPost1, userPost2, userPost5);
         List<UserPost> filteredList = new AuthorDatePostSorter().sort(initialList, SortOrder.DESC);
         Assertions.assertEquals(expected, filteredList);
     }
