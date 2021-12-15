@@ -66,4 +66,12 @@ class KeywordPostSorterTest {
         List<UserPost> filteredList = new KeywordPostSorter("example").sort(initialList, SortOrder.ASC);
         Assertions.assertEquals(expected, filteredList);
     }
+
+    @Test
+    void KeywordPostSorter_withMultipleElements_returnsMatchesDESC() {
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost2, userPost4, userPost3, userPost5);
+        List<UserPost> expected = Arrays.asList(userPost2, userPost4, userPost3, userPost1, userPost5);
+        List<UserPost> filteredList = new KeywordPostSorter("example").sort(initialList, SortOrder.DESC);
+        Assertions.assertEquals(expected, filteredList);
+    }
 }
