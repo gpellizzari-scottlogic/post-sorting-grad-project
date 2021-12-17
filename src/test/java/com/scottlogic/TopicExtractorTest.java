@@ -29,6 +29,10 @@ class TopicExtractorTest {
             OffsetDateTime.of(2021, 3, 12, 13, 22, 12, 0, ZoneOffset.UTC),
             "An example of a post \nwith lines breaks.", 3);
 
+    Topic rabbits = new Topic("rabbits", 4);
+    Topic cats = new Topic("cats", 3);
+    Topic animal = new Topic("animal", 2);
+
     @Test
     void topicExtractor_withNull_returnsEmptyList() {
         UserPost initialUserPost = null;
@@ -48,10 +52,13 @@ class TopicExtractorTest {
     @Test
     void topicExtractor_withContentAnd_returnsListOfTopics() {
         UserPost initialUserPost = userPost1;
-        List<Topic> expected = Arrays.asList(new Topic("rabbits: ",2), new Topic("fdsfs", 2));
+        List<Topic> expected = Arrays.asList(rabbits, cats, animal);
         List<Topic> listOfTopics = new TopicExtractor().extractTopics(initialUserPost);
-        for(Topic topic: listOfTopics) {
-            System.out.println("Topic: " + topic.getTopic() + " count: " + topic.getCount());
+        for(Topic topic: expected) {
+            topic.toString();
+        }
+        for(Topic topic2: listOfTopics) {
+            topic2.toString();
         }
         Assertions.assertEquals(expected, listOfTopics);
     }

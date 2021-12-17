@@ -9,6 +9,14 @@ public class Topic {
         this.count = count;
     }
 
+    @Override
+    public String toString() {
+        return "Topic{" +
+                "topic='" + topic + '\'' +
+                ", count=" + count +
+                '}';
+    }
+
     public String getTopic() {
         return topic;
     }
