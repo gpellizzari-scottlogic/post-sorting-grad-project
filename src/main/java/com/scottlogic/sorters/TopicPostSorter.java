@@ -19,9 +19,11 @@ public class TopicPostSorter implements PostSorter {
         List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
 
         if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(sortedUserPosts, Comparator.comparing(o -> new TopicExtractor().extractTopics(o).get(0).getTopic()));
+            Collections.sort(sortedUserPosts,
+                    Comparator.comparing(o -> new TopicExtractor().ExtractMainTopic(o)));
         } else {
-            Collections.sort(sortedUserPosts, Collections.reverseOrder(Comparator.comparing(o -> new TopicExtractor().extractTopics(o).get(0).getTopic())));
+            Collections.sort(sortedUserPosts,
+                    Collections.reverseOrder(Comparator.comparing(o -> new TopicExtractor().ExtractMainTopic(o))));
         }
 
         return sortedUserPosts;
