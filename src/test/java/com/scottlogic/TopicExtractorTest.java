@@ -50,16 +50,18 @@ class TopicExtractorTest {
     }
 
     @Test
-    void topicExtractor_withContentAnd_returnsListOfTopics() {
+    void topicExtractor_withContentAndTopics_returnsListOfTopics() {
         UserPost initialUserPost = userPost1;
         List<Topic> expected = Arrays.asList(rabbits, cats, animal);
         List<Topic> listOfTopics = new TopicExtractor().extractTopics(initialUserPost);
-        for(Topic topic: expected) {
-            topic.toString();
-        }
-        for(Topic topic2: listOfTopics) {
-            topic2.toString();
-        }
+        Assertions.assertEquals(expected, listOfTopics);
+    }
+
+    @Test
+    void topicExtractor_withContentAndNoTopics_returnsListOfTopics() {
+        UserPost initialUserPost = userPost4;
+        List<Topic> expected = Arrays.asList();
+        List<Topic> listOfTopics = new TopicExtractor().extractTopics(initialUserPost);
         Assertions.assertEquals(expected, listOfTopics);
     }
 }

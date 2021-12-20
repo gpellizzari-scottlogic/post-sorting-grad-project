@@ -41,7 +41,7 @@ public class TopicExtractor {
         return outputList;
     }
 
-    public String ExtractMainTopic(UserPost userPost){
+    public String ExtractMainTopic(UserPost userPost) {
         return extractTopics(userPost).get(0).getTopic();
     }
 
