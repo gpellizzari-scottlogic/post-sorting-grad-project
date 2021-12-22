@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DatePostSorter implements PostSorter {
 
@@ -18,12 +19,12 @@ public class DatePostSorter implements PostSorter {
             return new ArrayList<UserPost>();
         }
 
-        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList) ;
+        List<UserPost> sortedUserPosts;
 
         if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getDateTime));
+            sortedUserPosts = inputList.stream().sorted(Comparator.comparing(UserPost::getDateTime)).collect(Collectors.toList());
         } else {
-            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getDateTime).reversed());
+            sortedUserPosts = inputList.stream().sorted(Comparator.comparing(UserPost::getDateTime).reversed()).collect(Collectors.toList());
         }
         return sortedUserPosts;
     }
