@@ -25,6 +25,7 @@ public class LengthPostSorter implements PostSorter {
             case ASC -> inputList.stream()
                     .sorted(Comparator.comparingInt(o -> o.getContents().length()))
                     .collect(Collectors.toList());
+
             case DESC -> inputList.stream()
                     .sorted(Collections.reverseOrder(Comparator.comparingInt(o -> o.getContents().length())))
                     .collect(Collectors.toList());
