@@ -11,6 +11,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class KeywordPostSorter implements PostSorter {
 
@@ -39,20 +40,21 @@ public class KeywordPostSorter implements PostSorter {
 
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
-        List<UserPost> outputList = new ArrayList<UserPost>();
+        List<UserPost> sortedUserPosts = new ArrayList<UserPost>();
 
         if (inputList == null || inputList.isEmpty()) {
-            return outputList;
+            return sortedUserPosts;
         }
 
-        outputList = inputList;
+        sortedUserPosts = switch (sortOrder) {
+            case ASC -> inputList.stream()
+                    .sorted(Comparator.comparingInt(o -> getNumberOfKeywords(o)))
+                    .collect(Collectors.toList());
+            case DESC -> inputList.stream()
+                    .sorted(Collections.reverseOrder(Comparator.comparingInt(o -> getNumberOfKeywords(o))))
+                    .collect(Collectors.toList());
+        };
 
-        if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(outputList, Comparator.comparingInt(o -> getNumberOfKeywords(o)));
-        } else {
-            Collections.sort(outputList, Collections.reverseOrder(Comparator.comparingInt(o -> getNumberOfKeywords(o))));
-        }
-
-        return outputList;
+        return sortedUserPosts;
     }
 }
