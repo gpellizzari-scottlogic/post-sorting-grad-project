@@ -8,23 +8,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LengthPostSorter implements PostSorter {
 
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
 
+        List<UserPost> sortedUserPosts = new ArrayList<UserPost>();
+
         if (inputList == null || inputList.isEmpty()) {
-            return new ArrayList<UserPost>();
+            return sortedUserPosts;
         }
 
-        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
+        sortedUserPosts = switch (sortOrder) {
+            case ASC -> inputList.stream()
+                    .sorted(Comparator.comparingInt(o -> o.getContents().length()))
+                    .collect(Collectors.toList());
+            case DESC -> inputList.stream()
+                    .sorted(Collections.reverseOrder(Comparator.comparingInt(o -> o.getContents().length())))
+                    .collect(Collectors.toList());
+        };
 
-        if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(sortedUserPosts, Comparator.comparingInt(o -> o.getContents().length()));
-        } else {
-            Collections.sort(sortedUserPosts, Collections.reverseOrder(Comparator.comparingInt(o -> o.getContents().length())));
-        }
         return sortedUserPosts;
     }
 }
