@@ -6,6 +6,12 @@ import java.util.*;
 
 public class TopicExtractor {
 
+    StringCleaner stringCleaner;
+
+    public TopicExtractor(StringCleaner stringCleaner){
+        this.stringCleaner = stringCleaner;
+    }
+
     //method that receives a post as input and returns a list of all the topics it contains sorted by number of appearances .
     public List<Topic> extractTopics(UserPost userPost) {
 
@@ -16,7 +22,7 @@ public class TopicExtractor {
             return outputList;
         }
 
-        String content = new StringCleaner().cleanString(userPost.getContents());
+        String content = this.stringCleaner.cleanString(userPost.getContents());
         String[] words = content.split(" ");
 
         //loop through each word of the content and add it to the topic dictionary

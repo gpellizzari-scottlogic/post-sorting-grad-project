@@ -1,6 +1,7 @@
 package com.scottlogic.sorters;
 
 import com.scottlogic.*;
+import com.scottlogic.helpers.StringCleaner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,13 +18,14 @@ public class TopicPostSorter implements PostSorter {
         }
 
         List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
+        StringCleaner stringCleaner = new StringCleaner();
 
         if (sortOrder.equals(SortOrder.ASC)) {
             Collections.sort(sortedUserPosts,
-                    Comparator.comparing(o -> new TopicExtractor().ExtractMainTopic(o)));
+                    Comparator.comparing(o -> new TopicExtractor(stringCleaner).ExtractMainTopic(o)));
         } else {
             Collections.sort(sortedUserPosts,
-                    Collections.reverseOrder(Comparator.comparing(o -> new TopicExtractor().ExtractMainTopic(o))));
+                    Collections.reverseOrder(Comparator.comparing(o -> new TopicExtractor(stringCleaner).ExtractMainTopic(o))));
         }
 
         return sortedUserPosts;
