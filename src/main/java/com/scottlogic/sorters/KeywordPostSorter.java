@@ -51,6 +51,7 @@ public class KeywordPostSorter implements PostSorter {
             case ASC -> inputList.stream()
                     .sorted(Comparator.comparingInt(o -> getNumberOfKeywords(o)))
                     .collect(Collectors.toList());
+
             case DESC -> inputList.stream()
                     .sorted(Collections.reverseOrder(Comparator.comparingInt(o -> getNumberOfKeywords(o))))
                     .collect(Collectors.toList());

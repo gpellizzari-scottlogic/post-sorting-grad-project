@@ -13,10 +13,10 @@ public class AuthorDatePostSorter implements PostSorter {
 
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
-        List<UserPost> outputList = new ArrayList<UserPost>();
+        List<UserPost> sortedList = null;
 
         if (inputList == null || inputList.isEmpty()) {
-            return outputList;
+            return new ArrayList<UserPost>();
         }
 
         List<UserPost> listSortedByAuthor = new AuthorPostSorter().sort(inputList, sortOrder);
@@ -24,12 +24,11 @@ public class AuthorDatePostSorter implements PostSorter {
 
         for (UserPost userPost : listSortedByAuthor) {
             if (!userPost.getAuthor().equals(previousName)) {
-                //add to the output list some posts filtered by name
                 List<UserPost> tempList = new AuthorPostFilter(userPost.getAuthor()).filter(listSortedByAuthor);
-                outputList.addAll(new DatePostSorter().sort(tempList, SortOrder.ASC));
+                sortedList.addAll(new DatePostSorter().sort(tempList, SortOrder.ASC));
                 previousName = userPost.getAuthor();
             }
         }
-        return outputList;
+        return sortedList;
     }
 }
