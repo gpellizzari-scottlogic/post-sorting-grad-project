@@ -5,17 +5,15 @@ import java.util.List;
 
 public class StringCleaner {
 
-    private static final List<String> forbiddenWords = Arrays.asList("is", "as", "and", "to", "for", "it", "its", "the", "that", "we", "ever", "it", "he", "she", "a", "in", "i", "are", "this", "im", "there");
+    private static final List<String> forbiddenWords = Arrays.asList("is", "as", "and", "to", "for", "it", "its", "the", "that", "we", "ever", "it", "he", "she", "a", "in", "are", "this", "im","i", "there");
     private static String forbiddenWordsRegex;
 
     public StringCleaner() {
-        forbiddenWordsRegex = "[ ]{2,}|^\\s|\\s$";
+        forbiddenWordsRegex = "\\b" + forbiddenWords.get(0) + "\\b";
 
-        for (int i = 0; i < forbiddenWords.size(); i++) {
-            forbiddenWordsRegex += "|\\b" + forbiddenWords.get(i) + "\\b\\s";
+        for (int i = 1; i < forbiddenWords.size(); i++) {
+            forbiddenWordsRegex += "|\\b" + forbiddenWords.get(i) + "\\b";
         }
-
-        System.out.println(forbiddenWordsRegex);
     }
 
     //method that removes any punctuation or forbiddenWord from the String
@@ -25,15 +23,10 @@ public class StringCleaner {
             return "";
         }
 
-        String cleanedString = string.replaceAll("\\p{Punct}", "");
-        cleanedString = cleanedString.toLowerCase();
-
-        String previousString = "";
-        do {
-            previousString = cleanedString;
-            cleanedString = cleanedString.replaceAll(forbiddenWordsRegex, "");
-        } while (!cleanedString.equals(previousString));
-
-        return cleanedString;
+        return string.replaceAll("\\p{Punct}", "")
+                .toLowerCase()
+                .replaceAll(forbiddenWordsRegex, "")
+                .replaceAll("[ ]{2,}", " ")
+                .trim();
     }
 }

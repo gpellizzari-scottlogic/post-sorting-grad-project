@@ -55,4 +55,12 @@ class StringCleanerTest {
         Assertions.assertEquals(expected, cleanedString);
     }
 
+    @Test
+    void stringCleaner_withContentWithSpaceAtEnd_returnsCleanedString() {
+        String stringToClean = "I'm super confident that 2*2 is it";
+        String expected = "super confident 22";
+        String cleanedString = new StringCleaner().cleanString(stringToClean);
+        Assertions.assertEquals(expected, cleanedString);
+    }
+
 }
