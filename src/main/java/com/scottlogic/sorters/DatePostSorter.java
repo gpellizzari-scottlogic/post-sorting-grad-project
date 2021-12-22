@@ -21,11 +21,16 @@ public class DatePostSorter implements PostSorter {
 
         List<UserPost> sortedUserPosts;
 
-        if (sortOrder.equals(SortOrder.ASC)) {
-            sortedUserPosts = inputList.stream().sorted(Comparator.comparing(UserPost::getDateTime)).collect(Collectors.toList());
-        } else {
-            sortedUserPosts = inputList.stream().sorted(Comparator.comparing(UserPost::getDateTime).reversed()).collect(Collectors.toList());
-        }
+        sortedUserPosts = switch (sortOrder) {
+            case ASC -> inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getDateTime))
+                    .collect(Collectors.toList());
+
+            case DESC -> inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getDateTime).reversed())
+                    .collect(Collectors.toList());
+        };
+
         return sortedUserPosts;
     }
 }

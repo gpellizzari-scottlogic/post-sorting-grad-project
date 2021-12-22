@@ -20,11 +20,16 @@ public class AuthorPostSorter implements PostSorter {
 
         List<UserPost> sortedUserPosts;
 
-        if (sortOrder.equals((sortOrder.ASC))) {
-            sortedUserPosts = inputList.stream().sorted(Comparator.comparing(UserPost::getAuthorSurname)).collect(Collectors.toList());
-        } else {
-            sortedUserPosts = inputList.stream().sorted(Comparator.comparing(UserPost::getAuthorSurname).reversed()).collect(Collectors.toList());
-        }
+        sortedUserPosts = switch (sortOrder) {
+            case ASC -> inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getAuthorSurname))
+                    .collect(Collectors.toList());
+
+            case DESC -> inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getAuthorSurname).reversed())
+                    .collect(Collectors.toList());
+        };
+
         return sortedUserPosts;
     }
 }

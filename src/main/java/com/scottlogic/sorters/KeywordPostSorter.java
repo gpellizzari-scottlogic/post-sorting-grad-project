@@ -40,11 +40,12 @@ public class KeywordPostSorter implements PostSorter {
 
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
-        List<UserPost> sortedUserPosts = new ArrayList<UserPost>();
 
         if (inputList == null || inputList.isEmpty()) {
-            return sortedUserPosts;
+            return new ArrayList<UserPost>();
         }
+
+        List<UserPost> sortedUserPosts;
 
         sortedUserPosts = switch (sortOrder) {
             case ASC -> inputList.stream()
