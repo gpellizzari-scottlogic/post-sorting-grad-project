@@ -19,18 +19,12 @@ public class DatePostSorter implements PostSorter {
             return new ArrayList<UserPost>();
         }
 
-        List<UserPost> sortedUserPosts;
-
-        sortedUserPosts = switch (sortOrder) {
-            case ASC -> inputList.stream()
+        return sortOrder == SortOrder.ASC
+                ? inputList.stream()
                     .sorted(Comparator.comparing(UserPost::getDateTime))
-                    .collect(Collectors.toList());
-
-            case DESC -> inputList.stream()
+                    .collect(Collectors.toList())
+                : inputList.stream()
                     .sorted(Comparator.comparing(UserPost::getDateTime).reversed())
                     .collect(Collectors.toList());
-        };
-
-        return sortedUserPosts;
     }
 }
