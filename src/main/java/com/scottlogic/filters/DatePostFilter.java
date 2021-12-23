@@ -7,6 +7,7 @@ import java.time.DateTimeException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DatePostFilter implements PostFilter {
 
@@ -24,18 +25,14 @@ public class DatePostFilter implements PostFilter {
 
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
-        List<UserPost> filteredList = new ArrayList<UserPost>();
 
         if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
 
-        for (UserPost userPost : inputList) {
-            if (userPost.getDateTime().isAfter(startDate) && userPost.getDateTime().isBefore(endDate)) {
-                filteredList.add(userPost);
-            }
-        }
-        return filteredList;
+        return inputList.stream()
+                .filter(u -> u.getDateTime().isAfter(startDate) && u.getDateTime().isBefore(endDate))
+                .collect(Collectors.toList());
     }
 
     public OffsetDateTime getStartDate() {

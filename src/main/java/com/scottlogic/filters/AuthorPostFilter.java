@@ -6,6 +6,7 @@ import com.scottlogic.UserPost;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 public class AuthorPostFilter implements PostFilter {
 
@@ -25,17 +26,13 @@ public class AuthorPostFilter implements PostFilter {
 
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
-        List<UserPost> filteredList = new ArrayList<UserPost>();
 
         if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
 
-        for (UserPost userPost : inputList) {
-            if (userPost.getAuthor().equalsIgnoreCase(this.authorToFilter)) {
-                filteredList.add(userPost);
-            }
-        }
-        return filteredList;
+        return inputList.stream()
+                .filter(u -> u.getAuthor().equalsIgnoreCase(this.authorToFilter))
+                .collect(Collectors.toList());
     }
 }
