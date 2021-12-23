@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LengthPostSorter implements PostSorter {
 
@@ -18,13 +19,12 @@ public class LengthPostSorter implements PostSorter {
             return new ArrayList<UserPost>();
         }
 
-        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
-
-        if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(sortedUserPosts, Comparator.comparingInt(o -> o.getContents().length()));
-        } else {
-            Collections.sort(sortedUserPosts, Collections.reverseOrder(Comparator.comparingInt(o -> o.getContents().length())));
-        }
-        return sortedUserPosts;
+        return sortOrder == SortOrder.ASC
+                ? inputList.stream()
+                    .sorted(Comparator.comparingInt(o -> o.getContents().length()))
+                    .collect(Collectors.toList())
+                : inputList.stream()
+                    .sorted(Collections.reverseOrder(Comparator.comparingInt(o -> o.getContents().length())))
+                    .collect(Collectors.toList());
     }
 }

@@ -58,6 +58,14 @@ class AuthorPostSorterTest {
     }
 
     @Test
+    void authorPostSort_withMultipleElementsAndSortOrderNull_returnsOrderedListDESC() {
+        List<UserPost> initialList = Arrays.asList(userPost1, userPost5, userPost2, userPost3);
+        List<UserPost> expected = Arrays.asList(userPost5, userPost3, userPost1, userPost2);
+        List<UserPost> sortedList = new AuthorPostSorter().sort(initialList, null);
+        Assertions.assertEquals(expected, sortedList);
+    }
+
+    @Test
     void authorPostSort_withMultipleElements_returnsListWithMultipleElements() {
         List<UserPost> initialList = Arrays.asList(userPost5, userPost3, userPost1, userPost2);
         List<UserPost> expected = Arrays.asList(userPost1, userPost2, userPost3, userPost5);

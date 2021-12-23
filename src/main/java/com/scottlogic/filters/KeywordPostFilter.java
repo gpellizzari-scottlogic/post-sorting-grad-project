@@ -7,33 +7,33 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class KeywordPostFilter implements PostFilter {
 
+    private Pattern pattern;
     private String keyword;
 
     public KeywordPostFilter(String keyword) {
+        this.pattern = Pattern.compile("\\b" + keyword.toLowerCase() + "\\b");
         this.keyword = keyword;
+    }
+
+    private boolean matchKeyword(String content) {
+        Matcher matcher = pattern.matcher(content.toLowerCase());
+        return matcher.find();
     }
 
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
-        List<UserPost> filteredList = new ArrayList<UserPost>();
 
         if (inputList == null || inputList.isEmpty() || keyword.length() < 1) {
             return new ArrayList<UserPost>();
         }
 
-        String regex = "\\b" + this.keyword.toLowerCase() + "\\b";
-        Pattern pattern = Pattern.compile(regex);
-
-        for (UserPost userPost : inputList) {
-            Matcher matcher = pattern.matcher(userPost.getContents().toLowerCase());
-            if (matcher.find()) {
-                filteredList.add(userPost);
-            }
-        }
-        return filteredList;
+        return inputList.stream()
+                .filter(u -> matchKeyword(u.getContents()))
+                .collect(Collectors.toList());
     }
 
     public String getKeyword() {
@@ -41,6 +41,7 @@ public class KeywordPostFilter implements PostFilter {
     }
 
     public void setKeyword(String keyword) {
+        this.pattern = Pattern.compile("\\b" + keyword.toLowerCase() + "\\b");
         this.keyword = keyword;
     }
 }

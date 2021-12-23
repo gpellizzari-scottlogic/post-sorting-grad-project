@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LikePostSorter implements PostSorter {
 
@@ -18,14 +19,12 @@ public class LikePostSorter implements PostSorter {
             return new ArrayList<UserPost>();
         }
 
-        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
-
-        if (sortOrder.equals(SortOrder.ASC)) {
-            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getLikeCount));
-        } else {
-            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getLikeCount).reversed());
-        }
-
-        return sortedUserPosts;
+        return sortOrder == SortOrder.ASC
+                ? inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getLikeCount))
+                    .collect(Collectors.toList())
+                : inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getLikeCount).reversed())
+                    .collect(Collectors.toList());
     }
 }

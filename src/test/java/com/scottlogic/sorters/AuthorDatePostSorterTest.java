@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AuthorDatePostSorterTest {
 
     UserPost userPost1 = new UserPost("Joe Bloggs",
-            OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
+            OffsetDateTime.of(2020, 1, 2, 7, 12, 3, 0, ZoneOffset.UTC),
             "Hello World!", 2); //6
 
     UserPost userPost2 = new UserPost("Joe Bloggs",

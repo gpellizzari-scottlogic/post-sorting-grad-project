@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AuthorPostSorter implements PostSorter {
     @Override
@@ -17,13 +18,12 @@ public class AuthorPostSorter implements PostSorter {
             return new ArrayList<UserPost>();
         }
 
-        List<UserPost> sortedUserPosts = new ArrayList<UserPost>(inputList);
-
-        if (sortOrder.equals((sortOrder.ASC))) {
-            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getAuthorSurname));
-        } else {
-            Collections.sort(sortedUserPosts, Comparator.comparing(UserPost::getAuthorSurname).reversed());
-        }
-        return sortedUserPosts;
+        return sortOrder == SortOrder.ASC
+                ? inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getAuthorSurname))
+                    .collect(Collectors.toList())
+                : inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getAuthorSurname).reversed())
+                    .collect(Collectors.toList());
     }
 }

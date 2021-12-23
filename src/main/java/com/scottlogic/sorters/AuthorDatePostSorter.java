@@ -7,29 +7,25 @@ import com.scottlogic.filters.AuthorPostFilter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AuthorDatePostSorter implements PostSorter {
 
     @Override
     public List<UserPost> sort(List<UserPost> inputList, SortOrder sortOrder) {
-        List<UserPost> outputList = new ArrayList<UserPost>();
 
         if (inputList == null || inputList.isEmpty()) {
-            return outputList;
+            return new ArrayList<UserPost>();
         }
 
-        List<UserPost> listSortedByAuthor = new AuthorPostSorter().sort(inputList, sortOrder);
-        String previousName = null;
-
-        for (UserPost userPost : listSortedByAuthor) {
-            if (!userPost.getAuthor().equals(previousName)) {
-                //add to the output list some posts filtered by name
-                List<UserPost> tempList = new AuthorPostFilter(userPost.getAuthor()).filter(listSortedByAuthor);
-                outputList.addAll(new DatePostSorter().sort(tempList, SortOrder.ASC));
-                previousName = userPost.getAuthor();
-            }
-        }
-        return outputList;
+        return sortOrder == SortOrder.ASC
+                ? inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getAuthorSurname).thenComparing(UserPost::getDateTime))
+                    .collect(Collectors.toList())
+                : inputList.stream()
+                    .sorted(Comparator.comparing(UserPost::getAuthorSurname).reversed().thenComparing(UserPost::getDateTime))
+                    .collect(Collectors.toList());
     }
 }
