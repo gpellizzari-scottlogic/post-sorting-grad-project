@@ -17,7 +17,7 @@ class OrFilterTest {
             "Hello World!", 2);
 
     UserPost userPost2 = new UserPost("Joe Bloggs",
-            OffsetDateTime.of(2020, 1, 3, 7, 12, 3, 0, ZoneOffset.UTC),
+            OffsetDateTime.of(2020, 1, 3, 7, 13, 3, 0, ZoneOffset.UTC),
             "Hello World!", 2);
 
     UserPost userPost3 = new UserPost("Albert Einstein",

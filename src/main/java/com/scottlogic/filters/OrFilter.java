@@ -5,6 +5,8 @@ import com.scottlogic.UserPost;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OrFilter implements PostFilter {
 
@@ -18,18 +20,13 @@ public class OrFilter implements PostFilter {
 
     @Override
     public List<UserPost> filter(List<UserPost> inputList) {
+
         if (inputList == null || inputList.isEmpty()) {
             return new ArrayList<UserPost>();
         }
 
-        List<UserPost> combinedFilter = postFilter1.filter(inputList);
-        List<UserPost> filteredList2 = postFilter2.filter(inputList);
-
-        for (UserPost userPost : filteredList2) {
-            if (!combinedFilter.contains(userPost)) {
-                combinedFilter.add(userPost);
-            }
-        }
-        return combinedFilter;
+        return Stream.concat(postFilter1.filter(inputList).stream(), postFilter2.filter(inputList).stream())
+                .distinct()
+                .collect(Collectors.toList());
     }
 }
